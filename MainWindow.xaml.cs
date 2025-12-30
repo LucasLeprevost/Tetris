@@ -89,7 +89,7 @@ namespace Tetris
 		{
 			foreach (Position pos in bloc.PositionsDesTuiles())
 			{
-				imageControls[pos.Ligne, pos.Colonne].Source = blockImage[bloc.Id];
+				imageControls[pos.Ligne, pos.Colonne].Source = tuilesImg[bloc.Id];
             }
         }
 
