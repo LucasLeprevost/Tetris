@@ -3,13 +3,15 @@
 Petit projet perso pour apprendre le C# et WPF en faisant un Tetris.
 Le code est basé sur un tutoriel, mais adapté et traduit en français.
 
-## Technologies utilisées ?
-* **Langage** : C# (.NET 10.0 )
-* **Framework** : WPF
+Le projet n'est pas encore terminé mais le sera sous peut.
+
+## Technologies utilisées 
+* **Langage** : C# 
+* **Framework** : WPF, .NET 10.0
 * **IDE recommandé** : Visual Studio community 2026
 
 ## Lancer le jeu 
-* ./start.bat a la racine du projet sur Windows
+* ./start.bat à la racine du projet sur Windows
 
 ##  Contrôles (A venir)
 * **Flèches Gauche/Droite** : Bouger la pièce
