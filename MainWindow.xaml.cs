@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -99,14 +100,51 @@ namespace Tetris
 			DessinerBloc(etat.BlocActuel);
         }
 
-        private void Window_KeyDown(object sender, KeyEventArgs e)
-		{
 
-		}
-
-		private void TetrisCanvas_Loaded(object sender, RoutedEventArgs e)
+		private async Task JeuBouclePrincipale()
 		{
 			Dessiner(etatJeu);
+
+            while (!etatJeu.Perdu)
+			{
+				await Task.Delay(500);
+				etatJeu.DeplacerBlocBas();
+				Dessiner(etatJeu);
+            }
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (etatJeu.Perdu)
+				return;
+
+			switch (e.Key)
+            {
+                case Key.Left:
+                    etatJeu.DeplacerBlocGauche();
+                    break;
+                case Key.Right:
+                    etatJeu.DeplacerBlocDroite();
+                    break;
+				case Key.Down:	
+					etatJeu.DeplacerBlocBas();
+					break;
+                case Key.Up:
+                    etatJeu.TournerBloc('G');
+					break;
+				case Key.Z:
+					etatJeu.TournerBloc('D');
+					break;
+				default:
+					return;
+            }
+
+			Dessiner(etatJeu);
+        }
+
+		private async void TetrisCanvas_Loaded(object sender, RoutedEventArgs e)
+		{
+			await JeuBouclePrincipale();
         }
 
 		private void BoutonRejouerClick (object sender, RoutedEventArgs e)

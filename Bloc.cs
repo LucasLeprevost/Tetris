@@ -31,7 +31,15 @@ namespace Tetris
 			etatRotation = (etatRotation + 1) % Tuiles.Length;
 		}
 
-		public void AnnulerRotation()
+        public void TournerSensAntihoraire()
+        {
+			if (etatRotation == 0)
+				etatRotation = Tuiles.Length - 1;
+			else
+				etatRotation = (etatRotation - 1) ; 
+        }
+
+        public void AnnulerRotation()
 		{
 			if (etatRotation == 0)
 				etatRotation = Tuiles.Length - 1;

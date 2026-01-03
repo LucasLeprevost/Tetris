@@ -7,7 +7,8 @@ Le projet n'est pas encore terminé mais le sera sous peut.
 
 ## Technologies utilisées 
 * **Langage** : C# 
-* **Framework** : WPF, .NET 10.0
+* **Plateforme** : .NET 10.0
+* **Framework** : WPF
 * **IDE recommandé** : Visual Studio community 2026
 
 ## Lancer le jeu 

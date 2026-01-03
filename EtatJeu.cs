@@ -43,9 +43,12 @@
 			return true;
 		}
 
-		public void TournerBloc()
+		public void TournerBloc(char sens)
 		{
-			BlocActuel.TournerSensHoraire();
+			if (sens == 'G')
+				BlocActuel.TournerSensAntihoraire();
+            else
+                BlocActuel.TournerSensHoraire();
 
 			if (!BlocPeutTenir())
 				BlocActuel.AnnulerRotation();
