@@ -40,6 +40,9 @@ namespace Tetris
 		};
 
 		private readonly Image[,] imageControls;
+		private readonly int delaiMax = 700;
+		private readonly int delaiMin = 75;
+		private readonly int diminutionDuDelais = 25;
 
 		private EtatJeu etatJeu = new EtatJeu();
 
@@ -81,7 +84,8 @@ namespace Tetris
 				for (int colonne = 0; colonne < grille.Colonnes; colonne++)
 				{
 					int idTuile = grille[ligne, colonne];
-					imageControls[ligne, colonne].Source = tuilesImg[idTuile];
+                    imageControls[ligne, colonne].Opacity = 1;
+                    imageControls[ligne, colonne].Source = tuilesImg[idTuile];
 				}
 			}
 		}
@@ -90,38 +94,64 @@ namespace Tetris
 		{
 			foreach (Position pos in bloc.PositionsDesTuiles())
 			{
-				imageControls[pos.Ligne, pos.Colonne].Source = tuilesImg[bloc.Id];
+				imageControls[pos.Ligne, pos.Colonne].Opacity = 1.0;
+                imageControls[pos.Ligne, pos.Colonne].Source = tuilesImg[bloc.Id];
 			}
 		}
 
-        private void DessinerProchainBloc(FileDeBloc fileDeBlocs)
-        {
-            Bloc prochainBloc = fileDeBlocs.BlocSuivant;
-            NextImage.Source = blockImage[prochainBloc.Id];
-        }
+		private void DessinerProchainBloc(FileDeBloc fileDeBlocs)
+		{
+			Bloc prochainBloc = fileDeBlocs.BlocSuivant;
+			ImgSuivante.Source = blockImage[prochainBloc.Id];
+		}
 
+		private void DessinerBlocReserve(Bloc blocReserve)
+		{
+			if (blocReserve != null)
+				ImgReserve.Source = blockImage[blocReserve.Id];
+			else
+				ImgReserve.Source = blockImage[0];
+		}
 
-        private void Dessiner(EtatJeu etat)
+		private void DessinerBlocFantome(Bloc bloc)
+		{
+			int distanceChute = etatJeu.DistanceChuteTuile();
+
+			foreach (Position pos in bloc.PositionsDesTuiles())
+			{
+				imageControls[pos.Ligne + distanceChute, pos.Colonne].Opacity = 0.25; ;
+				imageControls[pos.Ligne + distanceChute, pos.Colonne].Source = tuilesImg[bloc.Id];
+			}
+
+		}
+
+		private void Dessiner(EtatJeu etat)
 		{
 			DessinerGrille(etat.Grille);
+			DessinerBlocFantome(etat.BlocActuel);
 			DessinerBloc(etat.BlocActuel);
 			DessinerProchainBloc(etat.File);
-        }
+			DessinerBlocReserve(etat.BlocEnReserve);
+			ScoreText.Text = $"Score: {etat.Score}";
+		}
 
-	
 
 		private async Task JeuBouclePrincipale()
 		{
+			int delai;
+			
 			Dessiner(etatJeu);
 
 			while (!etatJeu.Perdu)
 			{
-				await Task.Delay(500);
+				delai = Math.Max(delaiMin, delaiMax - (etatJeu.Score * diminutionDuDelais));
+				await Task.Delay(delai);
 				etatJeu.DeplacerBlocBas();
 				Dessiner(etatJeu);
 			}
 
 			MenuJeuFini.Visibility = Visibility.Visible;
+			TexteScoreFinale.Text = $"Score Final: {etatJeu.Score}";
 		}
 
 		private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -145,6 +175,12 @@ namespace Tetris
 					break;
 				case Key.Z:
 					etatJeu.TournerBloc('D');
+					break;
+				case Key.C:
+					etatJeu.EchangerBlocReserve();
+					break;
+				case Key.Space:
+					etatJeu.ChuteInstantanee();
 					break;
 				default:
 					return;
