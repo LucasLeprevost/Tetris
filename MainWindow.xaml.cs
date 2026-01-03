@@ -12,9 +12,7 @@ using System.Windows.Shapes;
 
 namespace Tetris
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
+
 	public partial class MainWindow : Window
 	{
 		private readonly ImageSource[] tuilesImg = new ImageSource[]
@@ -27,29 +25,29 @@ namespace Tetris
 			new BitmapImage(new Uri("Assets/TileGreen.png", UriKind.Relative)),
 			new BitmapImage(new Uri("Assets/TilePurple.png", UriKind.Relative)),
 			new BitmapImage(new Uri("Assets/TileRed.png", UriKind.Relative))
-        };
+		};
 
-        private readonly ImageSource[] blockImage = new ImageSource[]
-        {
-            new BitmapImage(new Uri("Assets/Block-Empty.png", UriKind.Relative)),
-            new BitmapImage(new Uri("Assets/Block-I.png",UriKind.Relative)),
-            new BitmapImage(new Uri("Assets/Block-J.png", UriKind.Relative)),
-            new BitmapImage(new Uri("Assets/Block-L.png", UriKind.Relative)),
-            new BitmapImage(new Uri("Assets/Block-O.png", UriKind.Relative)),
-            new BitmapImage(new Uri("Assets/Block-S.png", UriKind.Relative)),
-            new BitmapImage(new Uri("Assets/Block-T.png", UriKind.Relative)),
-            new BitmapImage(new Uri("Assets/Block-Z.png", UriKind.Relative))
-        };
+		private readonly ImageSource[] blockImage = new ImageSource[]
+		{
+			new BitmapImage(new Uri("Assets/Block-Empty.png", UriKind.Relative)),
+			new BitmapImage(new Uri("Assets/Block-I.png",UriKind.Relative)),
+			new BitmapImage(new Uri("Assets/Block-J.png", UriKind.Relative)),
+			new BitmapImage(new Uri("Assets/Block-L.png", UriKind.Relative)),
+			new BitmapImage(new Uri("Assets/Block-O.png", UriKind.Relative)),
+			new BitmapImage(new Uri("Assets/Block-S.png", UriKind.Relative)),
+			new BitmapImage(new Uri("Assets/Block-T.png", UriKind.Relative)),
+			new BitmapImage(new Uri("Assets/Block-Z.png", UriKind.Relative))
+		};
 
 		private readonly Image[,] imageControls;
 
 		private EtatJeu etatJeu = new EtatJeu();
 
-        public MainWindow()
+		public MainWindow()
 		{
 			InitializeComponent();
 			imageControls = MiseEnPLaceJeuCanvas(etatJeu.Grille);
-        }
+		}
 
 		private Image[,] MiseEnPLaceJeuCanvas(GrilleJeu grille)
 		{
@@ -65,14 +63,16 @@ namespace Tetris
 						Width = celluleTaille,
 						Height = celluleTaille
 					};
-					Canvas.SetTop(imageControl, ligne * celluleTaille);
+
+					Canvas.SetTop(imageControl, (ligne-2) * celluleTaille + 10);
+
 					Canvas.SetLeft(imageControl, colonne * celluleTaille);
 					TetrisCanvas.Children.Add(imageControl);
 					imageControls[ligne, colonne] = imageControl;
-                }
-            }
+				}
+			}
 			return imageControls;
-        }
+		}
 
 		private void DessinerGrille(GrilleJeu grille)
 		{
@@ -84,73 +84,86 @@ namespace Tetris
 					imageControls[ligne, colonne].Source = tuilesImg[idTuile];
 				}
 			}
-        }
+		}
 
 		private void DessinerBloc(Bloc bloc)
 		{
 			foreach (Position pos in bloc.PositionsDesTuiles())
 			{
 				imageControls[pos.Ligne, pos.Colonne].Source = tuilesImg[bloc.Id];
-            }
+			}
+		}
+
+        private void DessinerProchainBloc(FileDeBloc fileDeBlocs)
+        {
+            Bloc prochainBloc = fileDeBlocs.BlocSuivant;
+            NextImage.Source = blockImage[prochainBloc.Id];
         }
 
-		private void Dessiner(EtatJeu etat)
+
+        private void Dessiner(EtatJeu etat)
 		{
 			DessinerGrille(etat.Grille);
 			DessinerBloc(etat.BlocActuel);
+			DessinerProchainBloc(etat.File);
         }
 
+	
 
 		private async Task JeuBouclePrincipale()
 		{
 			Dessiner(etatJeu);
 
-            while (!etatJeu.Perdu)
+			while (!etatJeu.Perdu)
 			{
 				await Task.Delay(500);
 				etatJeu.DeplacerBlocBas();
 				Dessiner(etatJeu);
-            }
-        }
+			}
 
-        private void Window_KeyDown(object sender, KeyEventArgs e)
+			MenuJeuFini.Visibility = Visibility.Visible;
+		}
+
+		private void Window_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (etatJeu.Perdu)
 				return;
 
 			switch (e.Key)
-            {
-                case Key.Left:
-                    etatJeu.DeplacerBlocGauche();
-                    break;
-                case Key.Right:
-                    etatJeu.DeplacerBlocDroite();
-                    break;
+			{
+				case Key.Left:
+					etatJeu.DeplacerBlocGauche();
+					break;
+				case Key.Right:
+					etatJeu.DeplacerBlocDroite();
+					break;
 				case Key.Down:	
 					etatJeu.DeplacerBlocBas();
 					break;
-                case Key.Up:
-                    etatJeu.TournerBloc('G');
+				case Key.Up:
+					etatJeu.TournerBloc('G');
 					break;
 				case Key.Z:
 					etatJeu.TournerBloc('D');
 					break;
 				default:
 					return;
-            }
+			}
 
 			Dessiner(etatJeu);
-        }
+		}
 
 		private async void TetrisCanvas_Loaded(object sender, RoutedEventArgs e)
 		{
 			await JeuBouclePrincipale();
-        }
-
-		private void BoutonRejouerClick (object sender, RoutedEventArgs e)
-		{
-
 		}
 
-    }
+		private async void BoutonRejouerClick (object sender, RoutedEventArgs e)
+		{
+			etatJeu = new EtatJeu();
+			MenuJeuFini.Visibility = Visibility.Hidden;
+			await JeuBouclePrincipale();
+		}
+
+	}
 }

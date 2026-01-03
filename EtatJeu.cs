@@ -2,12 +2,7 @@
 {
 	public class EtatJeu
 	{
-		private Bloc blocActuel;
-
-		public GrilleJeu Grille { get; }
-		public FileDeBloc File { get; }
-		public bool Perdu { get; private set; }
-		public int Score { get; private set; }
+		private Bloc blocActuel = null!; 
 
 		public Bloc BlocActuel
 		{
@@ -26,7 +21,13 @@
 			}
 		}
 
-		public EtatJeu()
+
+        public GrilleJeu Grille { get; }
+        public FileDeBloc File { get; }
+        public bool Perdu { get; private set; }
+        public int Score { get; private set; }
+
+        public EtatJeu()
 		{
 			Grille = new GrilleJeu(22, 10);
 			File = new FileDeBloc();
@@ -46,12 +47,18 @@
 		public void TournerBloc(char sens)
 		{
 			if (sens == 'G')
+			{
 				BlocActuel.TournerSensAntihoraire();
-            else
-                BlocActuel.TournerSensHoraire();
+				if (!BlocPeutTenir())
+					BlocActuel.TournerSensHoraire();
+            }
+			else
+			{
+				BlocActuel.TournerSensHoraire();
 
-			if (!BlocPeutTenir())
-				BlocActuel.AnnulerRotation();
+				if (!BlocPeutTenir())
+					BlocActuel.TournerSensAntihoraire();
+            }
 		}
 
 		public void DeplacerBlocGauche()
@@ -75,7 +82,7 @@
 		private bool EstDefaite()
 		{
 			return !(Grille.EstVideLigne(0) && Grille.EstVideLigne(1));
-        }
+		}
 
 		private void PlacerBloc()
 		{

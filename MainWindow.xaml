@@ -33,7 +33,7 @@
 			<Canvas x:Name ="TetrisCanvas"
 					Background= "#101010"
 					Width="250"
-					Height="500"
+					Height="510"
 					ClipToBounds="True"
 					Loaded="TetrisCanvas_Loaded"/>
 		</Viewbox>
