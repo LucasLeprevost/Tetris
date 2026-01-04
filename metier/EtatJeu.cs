@@ -1,6 +1,6 @@
-﻿using Tetris.Blocs;
+﻿using Tetris.metier.Blocs;
 
-namespace Tetris
+namespace Tetris.metier
 {
 	public class EtatJeu
 	{
