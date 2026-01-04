@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Tetris.Blocs;
 
 namespace Tetris
 {
@@ -131,7 +132,7 @@ namespace Tetris
 			DessinerBlocFantome(etat.BlocActuel);
 			DessinerBloc(etat.BlocActuel);
 			DessinerProchainBloc(etat.File);
-			DessinerBlocReserve(etat.BlocEnReserve);
+			DessinerBlocReserve(etat.BlocEnReserve!);
 			ScoreText.Text = $"Score: {etat.Score}";
 		}
 

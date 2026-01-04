@@ -55,8 +55,4 @@
     <Resource Include="Assets\TileYellow.png" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Blocs\" />
-  </ItemGroup>
-
 </Project>

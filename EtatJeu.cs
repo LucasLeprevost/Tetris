@@ -1,4 +1,6 @@
-﻿namespace Tetris
+﻿using Tetris.Blocs;
+
+namespace Tetris
 {
 	public class EtatJeu
 	{
@@ -26,7 +28,7 @@
 		public FileDeBloc File { get; }
 		public bool Perdu { get; private set; }
 		public int Score { get; private set; }
-		public Bloc BlocEnReserve { get; private set; }
+		public Bloc? BlocEnReserve { get; private set; }
 		public bool PeutEchanger { get; private set; }
 
 
