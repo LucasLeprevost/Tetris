@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using Tetris.Blocs;
+using Tetris.metier.Blocs;
 
-namespace Tetris
+namespace Tetris.metier
 {
 	public class FileDeBloc
 	{

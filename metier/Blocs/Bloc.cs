@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Tetris.metier;
 
-namespace Tetris.Blocs
+namespace Tetris.metier.Blocs
 {
 	public abstract class Bloc
 	{

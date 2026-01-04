@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Tetris
+namespace Tetris.metier
 {
 	public class GrilleJeu
 	{

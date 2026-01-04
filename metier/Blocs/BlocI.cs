@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using Tetris.metier;
 
-namespace Tetris.Blocs
+namespace Tetris.metier.Blocs
 {
     public class BlocI : Bloc
     {
