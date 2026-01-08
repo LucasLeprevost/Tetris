@@ -1,12 +1,12 @@
 # Tetris 
 
 Petit projet perso pour apprendre le C# et WPF en faisant un Tetris.
-Le code est bas� sur un tutoriel, mais adapt� et traduit en fran�ais.
+Le code est basé sur un tutoriel, mais adapté et traduit en français.
 
-## Technologies utilis�es 
+## Technologies utilisées 
 * **Langage** : C# 
 * **Framework** : WPF, .NET 10.0
-* **IDE recommand�** : Visual Studio community 2026
+* **IDE recommandé** : Visual Studio community 2026
 
 ## Aperçu du projet
 
@@ -17,26 +17,26 @@ Le code est bas� sur un tutoriel, mais adapt� et traduit en fran�ais.
 
 
 ## Lancer le jeu 
-* ./start.bat � la racine du projet sur Windows
+* ./start.bat é la racine du projet sur Windows
 
-##  Contr�les
-* **Fl�ches Gauche/Droite** : Bouger la pi�ce
-* **Fl�che Haut** : Tourner la pi�ce dans le sens des aiguilles d'une montre
-* **Z** : Tourner la pi�ce dans le sens inverse des aiguilles d'une montre
-* **Fl�che Bas** : Descendre plus vite
-* **Espace** : chute acc�l�r�e
-* **C** : Mettre en r�serve
+##  Controles
+* **Flèches Gauche/Droite** : Bouger la pièce
+* **Flèche Haut** : Tourner la pièce dans le sens des aiguilles d'une montre
+* **Z** : Tourner la pièce dans le sens inverse des aiguilles d'une montre
+* **Fléche Bas** : Descendre plus vite
+* **Espace** : chute accélérée
+* **C** : Mettre en réserve
 
-##  �tat du projet
+##  Etat du projet
 * [x] Grille de jeu fonctionnelle
-* [x] Syst�me de blocs (I, J, L, O, S, T, Z)
-* [x] Gravit� et collisions de base
+* [x] Système de blocs (I, J, L, O, S, T, Z)
+* [x] Gravité et collisions de base
 * [x] Affichage graphique (WPF)
-* [x] Rotation compl�te
+* [x] Rotation compléte
 * [x] Score et niveaux
 * [x] Game Over
-* [x] Syst�me de chute acc�l�r�e et bloc fant�me
-* [x] Syst�me de mise en r�serve 
+* [x] Système de chute accélérée et bloc fantome
+* [x] Système de mise en réserve 
 * [x] Affichage du prochain bloc
 * [ ] Menu de pause
 * [ ] Ajouter des sons
