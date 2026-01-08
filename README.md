@@ -17,7 +17,7 @@ Le code est basé sur un tutoriel, mais adapté et traduit en français.
 
 
 ## Lancer le jeu 
-* ./start.bat é la racine du projet sur Windows
+* ./start.bat à la racine du projet sur Windows
 
 ##  Controles
 * **Flèches Gauche/Droite** : Bouger la pièce
