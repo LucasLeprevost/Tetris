@@ -1,32 +1,43 @@
 # Tetris 
 
 Petit projet perso pour apprendre le C# et WPF en faisant un Tetris.
-Le code est basé sur un tutoriel, mais adapté et traduit en français.
+Le code est basï¿½ sur un tutoriel, mais adaptï¿½ et traduit en franï¿½ais.
 
-## Technologies utilisées 
+## Technologies utilisï¿½es 
 * **Langage** : C# 
 * **Framework** : WPF, .NET 10.0
-* **IDE recommandé** : Visual Studio community 2026
+* **IDE recommandï¿½** : Visual Studio community 2026
+
+## AperÃ§u du projet
+
+![dÃ©but de la partie](images/debut.png)
+
+![Fin de la partie](images/scoreFinal.png)
+
+
 
 ## Lancer le jeu 
-* ./start.bat à la racine du projet sur Windows
+* ./start.bat ï¿½ la racine du projet sur Windows
 
-##  Contrôles
-* **Flèches Gauche/Droite** : Bouger la pièce
-* **Flèche Haut** : Tourner la pièce dans le sens des aiguilles d'une montre
-* **Z** : Tourner la pièce dans le sens inverse des aiguilles d'une montre
-* **Flèche Bas** : Descendre plus vite
-* **Espace** : chute accélérée
-* **C** : Mettre en réserve
+##  Contrï¿½les
+* **Flï¿½ches Gauche/Droite** : Bouger la piï¿½ce
+* **Flï¿½che Haut** : Tourner la piï¿½ce dans le sens des aiguilles d'une montre
+* **Z** : Tourner la piï¿½ce dans le sens inverse des aiguilles d'une montre
+* **Flï¿½che Bas** : Descendre plus vite
+* **Espace** : chute accï¿½lï¿½rï¿½e
+* **C** : Mettre en rï¿½serve
 
-##  État du projet
+##  ï¿½tat du projet
 * [x] Grille de jeu fonctionnelle
-* [x] Système de blocs (I, J, L, O, S, T, Z)
-* [x] Gravité et collisions de base
+* [x] Systï¿½me de blocs (I, J, L, O, S, T, Z)
+* [x] Gravitï¿½ et collisions de base
 * [x] Affichage graphique (WPF)
-* [x] Rotation complète
+* [x] Rotation complï¿½te
 * [x] Score et niveaux
 * [x] Game Over
-* [x] Système de chute accélérée et bloc fantôme
-* [x] Système de mise en réserve 
+* [x] Systï¿½me de chute accï¿½lï¿½rï¿½e et bloc fantï¿½me
+* [x] Systï¿½me de mise en rï¿½serve 
 * [x] Affichage du prochain bloc
+* [ ] Menu de pause
+* [ ] Ajouter des sons
+* [ ] AmÃ©liorer le systÃ¨me de score + systÃ¨me de combos
